@@ -5,3 +5,6 @@ export default {
   createStore,
   withStore
 }
+
+exports.createStore = createStore
+exports.withStore = withStore
