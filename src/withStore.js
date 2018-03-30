@@ -1,12 +1,15 @@
 import React from 'react'
-import createStore from './store'
+import createStore from './createStore'
 
-export default Component =>
+export default (initialState = {}) => Component =>
   class WrappedComponent extends React.Component {
     constructor (props) {
       super(props)
 
-      this.store = createStore({...this.props})
+      this.store = createStore({
+        ...initialState,
+        ...this.props
+      })
       this.state = this.store.getState()
     }
 
