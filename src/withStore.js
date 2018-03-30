@@ -14,20 +14,22 @@ export default (initialState = {}) => Component =>
     }
 
     componentDidMount = () => {
-      Object.keys(this.props).forEach(key => {
+      Object.keys(initialState).forEach(key => {
         this.store.subscribe(key, this.callback(key))
       })
     }
 
     componentWillUnmount = () => {
-      Object.keys(this.props).forEach(key => {
+      Object.keys(initialState).forEach(key => {
         this.store.unsubscribe(key, this.callback(key))
       })
     }
 
     componentWillReceiveProps = (nextProps) => {
-      Object.keys(nextProps).forEach(key => {
-        this.store.update(key, nextProps[key])
+      Object.keys(initialState).forEach(key => {
+        if (nextProps.hasOwnProperty(key)) {
+          this.store.update(key, nextProps[key])
+        }
       })
     }
 
