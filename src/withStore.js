@@ -6,10 +6,7 @@ export default (initialState = {}) => Component =>
     constructor (props) {
       super(props)
 
-      this.store = createStore({
-        ...initialState,
-        ...this.props
-      })
+      this.store = createStore(initialState)
       this.state = this.store.getState()
     }
 
@@ -40,6 +37,7 @@ export default (initialState = {}) => Component =>
     render () {
       return (
         <Component
+          {...this.props}
           {...this.state}
           store={this.store}
         />
