@@ -6,7 +6,12 @@ export default (initialState = {}) => Component =>
     constructor (props) {
       super(props)
 
-      this.store = createStore(initialState)
+      this.store = createStore(
+        Object.keys(initialState).reduce((acc, val) => ({
+          ...acc,
+          [val]: this.props[val] || initialState[val]
+        }), {})
+      )
       this.state = this.store.getState()
     }
 
