@@ -6,13 +6,10 @@ export default (initialState = {}) => Component =>
     constructor (props) {
       super(props)
 
-      this.store = createStore(
-        Object.keys(initialState).reduce((acc, val) => ({
-          ...acc,
-          [val]: this.props[val] || initialState[val]
-        }), {})
-      )
-      this.state = this.store.getState()
+      this.store = this.initStore(initialState)
+      this.state = {
+        ...initialState
+      }
     }
 
     componentDidMount = () => {
@@ -29,7 +26,10 @@ export default (initialState = {}) => Component =>
 
     componentWillReceiveProps = (nextProps) => {
       Object.keys(initialState).forEach(key => {
-        if (nextProps.hasOwnProperty(key)) {
+        if (
+          nextProps.hasOwnProperty(key) &&
+          nextProps[key] !== this.store.get(key)
+        ) {
           this.store.update(key, nextProps[key])
         }
       })
@@ -38,6 +38,13 @@ export default (initialState = {}) => Component =>
     callback = key => value => {
       this.setState({ [key]: value })
     }
+
+    initStore = (initialState) => createStore(
+      Object.keys(initialState).reduce((acc, val) => ({
+        ...acc,
+        [val]: this.props[val] || initialState[val]
+      }), {})
+    )
 
     render () {
       return (

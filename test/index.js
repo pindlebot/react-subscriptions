@@ -21,7 +21,7 @@ class TestComponent extends React.Component {
   render () {
     console.log({
       props: this.props.number,
-      state: this.state.number,
+      state: this.state.number
     })
     return (
       <div></div>
@@ -52,8 +52,9 @@ class Example extends React.Component {
     return (<WrappedTestComponent number={this.state.number} />)
   }
 }
+
 const testRenderer = TestRenderer.create(
   <Example />
-);
+)
 
 // console.log(testRenderer.toJSON());

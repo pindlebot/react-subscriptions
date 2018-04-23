@@ -1,3 +1,5 @@
+// lifted from https://github.com/draft-js-plugins/draft-js-plugins
+
 const createStore = (initialState) => {
   let state = initialState || {}
   const listeners = {}
