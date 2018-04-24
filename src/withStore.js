@@ -7,9 +7,7 @@ export default (initialState = {}) => Component =>
       super(props)
 
       this.store = this.initStore(initialState)
-      this.state = {
-        ...initialState
-      }
+      this.state = this.store.getState()
     }
 
     componentDidMount = () => {
