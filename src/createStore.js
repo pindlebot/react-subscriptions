@@ -1,7 +1,7 @@
 // lifted from https://github.com/draft-js-plugins/draft-js-plugins
 
-const createStore = (initialState) => {
-  let state = initialState || {}
+const createStore = (initialState = {}) => {
+  let state = { ...initialState }
   const listeners = {}
 
   const subscribe = (key, callback) => {
@@ -10,7 +10,11 @@ const createStore = (initialState) => {
   }
 
   const unsubscribe = (key, callback) => {
-    listeners[key] = listeners[key].filter((listener) => listener !== callback)
+    if (listeners.hasOwnProperty(key)) {
+      listeners[key] = listeners[key].filter((listener) => listener !== callback)
+    } else {
+      console.warn(`No listener with key ${key}`)
+    }
   }
 
   const update = (key, item) => {

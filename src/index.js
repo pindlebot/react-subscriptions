@@ -1,13 +1,3 @@
-import createStore from './createStore'
-import withStore from './withStore'
-import withMergedProps from './withMergedProps'
-
-export default {
-  createStore,
-  withStore,
-  withMergedProps
-}
-
-exports.createStore = createStore
-exports.withStore = withStore
-exports.withMergedProps = withMergedProps
+export { default as createStore } from './createStore'
+export { default as withStore } from './withStore'
+export { default as withMergedProps } from './withMergedProps'
